@@ -1,14 +1,12 @@
 import { createStore } from 'redux'
 
-const FIRST_ACTION = 'FIRST_ACTION'
-
 const INITIAL_STATE = {
     firstAction: false
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case FIRST_ACTION:
+        case 'FIRST_ACTION':
             return {
                 ...state,
                 firstAction: true
@@ -27,6 +25,8 @@ export const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-window.dispatchFirstAction = () => store.dispatch({
-    type: FIRST_ACTION
+window.dispatchFirstAction = () => store.dispatch(firstAction())
+
+const firstAction = () => ({
+    type: 'FIRST_ACTION'
 })
