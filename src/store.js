@@ -2,7 +2,7 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import counterReducerName from './state/counter'
 import toDo from './state/toDo'
-import fetchUsers, { fetchUserList } from './state/fetchUsers';
+import fetchUsers from './state/fetchUsers';
 
 const reducer = combineReducers({
     counterReducerName,
@@ -18,5 +18,3 @@ export const store = createStore(
     applyMiddleware(thunk)
   )
 )
-
-window.fetchUserList = () => store.dispatch(fetchUserList())

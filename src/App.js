@@ -1,9 +1,10 @@
 import React from 'react'
 //import Counter from './Counter'
-import ToDo from './ToDo'
+//import ToDo from './ToDo'
+import FetchUsers from './FetchUsers'
 
 const App = props => (
-    <ToDo />
+    <FetchUsers />
 )
 
 
