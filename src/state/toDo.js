@@ -3,6 +3,7 @@ const ADD_NEW_TASK = 'toDo/ADD_NEW_TASK'
 const FILTER_ALL = 'toDo/FILTER_ALL'
 const FILTER_COMPLETED = 'toDo/FILTER_COMPLETED'
 const FILTER_UNCOMPLETED = 'toDo/FILTER_UNCOMPLETED'
+const TOGGLE_COMPLETED = 'toDo/TOGGLE_COMPLETED'
 
 const INITIAL_STATE = {
     tasks: [],
@@ -29,6 +30,11 @@ export const filterCompletedTasksAction = () => ({
 
 export const filterUncompletedTasksAction = () => ({
     type: FILTER_UNCOMPLETED
+})
+
+export const toggleCompleted = (key) => ({
+    type: TOGGLE_COMPLETED,
+    key
 })
 
 export default (state = INITIAL_STATE, action) => {
@@ -60,6 +66,15 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 visibleTasks: state.tasks.filter(task => task.isCompleted === false)
+            }
+        }
+        case TOGGLE_COMPLETED: {
+            return {
+                ...state,
+                tasks: [...state.tasks, {
+                    ...state.tasks.find(task => task.key === action.key),
+                    isCompleted: !state.tasks.find(task => task.key === action.key).isCompleted
+                }]
             }
         }
         default:

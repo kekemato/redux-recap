@@ -1,29 +1,22 @@
-import { createStore, combineReducers } from 'redux'
-import counterReducerName, { inc, dec } from './state/counter'
-import toDo, {
-    newTaskAction,
-    addNewTaskAction,
-    filterAllTasksAction,
-    filterCompletedTasksAction,
-    filterUncompletedTasksAction
-} from './state/toDo'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import counterReducerName from './state/counter'
+import toDo from './state/toDo'
+import fetchUsers, { fetchUserList } from './state/fetchUsers';
 
-const rootReducer = combineReducers({
+const reducer = combineReducers({
     counterReducerName,
-    toDo
+    toDo,
+    fetchUsers
 })
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 export const store = createStore(
-    rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducer,
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
 )
 
-window.inc = () => store.dispatch(inc())
-window.dec = () => store.dispatch(dec())
-window.newTaskAction = text => store.dispatch(newTaskAction(text))
-window.addNewTaskAction = () => store.dispatch(addNewTaskAction())
-window.filterAllTasksAction = () => store.dispatch(filterAllTasksAction())
-window.filterCompletedTasksAction = () => store.dispatch(filterCompletedTasksAction())
-window.filterUncompletedTasksAction = () => store.dispatch(filterUncompletedTasksAction())
-
+window.fetchUserList = () => store.dispatch(fetchUserList())

@@ -7,6 +7,7 @@ import {
     filterAllTasksAction,
     filterCompletedTasksAction,
     filterUncompletedTasksAction,
+    toggleCompleted
 } from './state/toDo'
 
 const ToDo = props => (
@@ -41,6 +42,7 @@ const ToDo = props => (
                 <MenuItem
                     primaryText={task.task}
                     key={task.key}
+                    onClick={() => props._toggleCompleted(task.key)}
                 />
             ))}
         </List>
@@ -57,6 +59,7 @@ const mapDispatchToProps = dispatch => ({
     _filterAllTasksAction: () => dispatch(filterAllTasksAction()),
     _filterCompletedTasksAction: () => dispatch(filterCompletedTasksAction()),
     _filterUncompletedTasksAction: () => dispatch(filterUncompletedTasksAction()),
+    _toggleCompleted: (key) => dispatch(toggleCompleted(key))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDo)
