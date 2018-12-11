@@ -41,7 +41,8 @@ export default (state = INITIAL_STATE, action) => {
         case ADD_NEW_TASK:
             return {
                 ...state,
-                tasks: state.tasks.concat({ task: state.text, isCompleted: false })
+                tasks: state.tasks.concat({ task: state.text, isCompleted: false, key: Date.now() }),
+                visibleTasks: state.visibleTasks.concat({ task: state.text, isCompleted: false, key: Date.now() })
             }
         case FILTER_ALL: {
             return {
