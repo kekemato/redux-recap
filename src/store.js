@@ -1,10 +1,10 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 const INITIAL_STATE = {
     firstAction: false
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const firstActionReducerName = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case 'FIRST_ACTION':
             return {
@@ -19,8 +19,20 @@ const reducer = (state = INITIAL_STATE, action) => {
     }
 }
 
+const counterReducerName = (state= {counter: 0}, action) => {
+    switch(action.type){
+        default:
+        return state
+    }
+}
+
+const rootReducer = combineReducers({
+    firstActionReducerName,
+    counterReducerName
+})
+
 export const store = createStore(
-    reducer,
+    rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
