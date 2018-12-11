@@ -3,14 +3,7 @@ import { createStore } from 'redux'
 const FIRST_ACTION = 'FIRST_ACTION'
 
 const INITIAL_STATE = {
-    people: {
-        person1: {
-            name: 'Ala'
-        },
-        person2: {
-            name: 'Bartek'
-        }
-    }
+    firstAction: false
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -34,6 +27,6 @@ export const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-store.dispatch({
+window.dispatchFirstAction = () => store.dispatch({
     type: FIRST_ACTION
 })
